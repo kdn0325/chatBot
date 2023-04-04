@@ -1,0 +1,8 @@
+{
+    "chats" : [
+        { "id": 1, "senderId": 0, "text": "정말", "date": "Sat Oct 01 2022 02:49:31 GMT+0900" },
+        { "id": 2, "senderId": 0, "text": "고마워요", "date": "Sat Oct 01 2022 02:49:31 GMT+0900" },
+        { "id": 3, "senderId": 1, "text": "안아줘요", "date": "Sat Oct 01 2022 02:49:31 GMT+0900" },
+        { "id": 4, "senderId": 2, "text": "좋아해요", "date": "Sat Oct 01 2022 02:49:31 GMT+0900" }
+    ]
+}

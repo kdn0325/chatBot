@@ -1,6 +1,51 @@
 {
   "extends": "expo/tsconfig.base",
-  "compilerOptions": {
-    "strict": true
-  }
+    "compilerOptions": {
+        "baseUrl": "./src",
+        "paths": {
+            "@/*": ["./*"],
+            "@src/*": ["src/*"],
+            "@assets/*": ["assets/*"],
+            "@components/*": ["components/*"],
+            "@config/*": ["config/*"],
+            "@hooks/*": ["hooks/*"],
+            "@routes/*": ["routes/*"],
+            "@screens/*": ["screens/*"],
+            "@services/*": ["services/*"],
+            "@styles/*": ["styles/*"],
+            "@utils/*": ["utils/*"],
+            "@layout/*": ["layout/*"],
+            "@types/*": ["types/*"],
+            "@data/*": ["data/*"],
+            "@navigation/*": ["navigation/*"],
+        },
+        "plugins": [
+            {
+              "name": "typescript-styled-plugin",
+              "lint": {
+                // "unknownProperties": "ignore" // "ignore" | "warning" | "error",
+                "validProperties": [
+                    "shadow-color",
+                    "shadow-opacity",
+                    "shadow-offset",
+                    "shadow-radius",
+                    "padding-horizontal",
+                    "padding-vertical",
+                    "margin-vertical",
+                    "margin-horizontal",
+                    "tint-color",
+                    "aspect-ratio",
+                    "elevation",
+                    "include-font-padding",
+                    "text-align-vertical",
+                    "border-bottom-color",
+                    "border-bottom-width",
+                    "border-bottom-style",
+                  ]
+              }
+            }
+        ]
+    }
 }
+
+
