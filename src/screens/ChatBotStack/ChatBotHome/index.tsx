@@ -40,28 +40,25 @@ const ChatBotHome = ({ navigation }: NavigationProp) => {
   const [submitDate, setSubmitDate] = useState("");
   const [createDate, setCreateDate] = useState("");
   const flatListRef = useRef(null);
-  // const txt = "오늘은 뭐 먹지?";
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // setTextInput(Text + txt[count]); // 이전 set한 문자 + 다음 문자
-  //       setCount(count + 1); // 개수 만큼 체크
-  //   }, 100);
-  //   if(count === textInput.length)  {  // Count를 따로 두지 않고 Text.length 체크도 가능
-  //       clearInterval(interval); // 문자열 체크를 통해 setInterval을 해제합니다
-  //   }
-  //   return () => clearInterval(interval); // 언마운트시 setInterval을 해제합니다
-  // })
-
-  const apiKey = `${Config.apiKey}`;
-  const apiUrl = `${Config.apiUrl}`;
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // setTextInput(Text + txt[count]); // 이전 set한 문자 + 다음 문자
+      setCount(count + 1); // 개수 만큼 체크
+    }, 100);
+    if (count === textInput.length) {
+      // Count를 따로 두지 않고 Text.length 체크도 가능
+      clearInterval(interval); // 문자열 체크를 통해 setInterval을 해제합니다
+    }
+    return () => clearInterval(interval); // 언마운트시 setInterval을 해제합니다
+  });
 
   const handleSend = async () => {
     const propmt = textInput;
     setLoading(true);
     setTextInput("");
     const res = await axios.post(
-      apiUrl,
+      `${Config.apiUrl}`,
       {
         prompt: propmt,
         max_tokens: 1024,
@@ -70,14 +67,12 @@ const ChatBotHome = ({ navigation }: NavigationProp) => {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
+          Authorization: `Bearer ${Config.apiKey}`,
         },
       }
     );
     const text = res.data.choices[0].text;
     const time = res.data.created;
-    console.log("res.headers.date?", res.data.created);
-    console.log("res.data?", res.data);
 
     setData([
       ...data,
@@ -126,30 +121,32 @@ const ChatBotHome = ({ navigation }: NavigationProp) => {
     return `${hours}:${minutes}:${seconds}`; //clock에 innerText로 넣어줬음;
   }
 
-  // const pressHandler = async () => {
-  //     setLoading(true);
-  //     setTextInput('');
-  //     const formsubmit = {
-  //       'text':textInput,
-  //     };
-  //     setLoading(false);
-  //     const res = await getFormSubmit(formsubmit);
-  //     // console.log("formsubmit?",formsubmit);
-  //     // console.log("res?",res);
-  //     // console.log("text?",textInput);
-  //     // console.log("res.data 결과값 도출?",res.data);
-  //     // console.log("res.headers.date?",res.headers.date);
-  //     setData([...data,{type:'user','text':textInput,'time':new Date(res.headers.date)},{type:'bot','text':res.data.resMsg,'time':new Date(res.headers.date)}])
-  // };
-  //     tI7iIhm0
-  // 비밀 키( REST API 호출에 사용 )
-  // sk_test_hJCzFYorik8EAeKPj0AW3LxSHEf5yS8Q
-  // const messageBoxRef = useRef<HTMLUListElement>();
-  //   const scrollToBottom = () => {
-  //     if (messageBoxRef.current) {
-  //       messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
-  //     }
-  //   };
+  const pressHandler = async () => {
+    setLoading(true);
+    setTextInput("");
+    const formsubmit = {
+      text: textInput,
+    };
+    setLoading(false);
+    const res = await getFormSubmit(formsubmit);
+    // console.log("formsubmit?",formsubmit);
+    // console.log("res?",res);
+    // console.log("text?",textInput);
+    // console.log("res.data 결과값 도출?",res.data);
+    // console.log("res.headers.date?",res.headers.date);
+    setData([
+      ...data,
+      { type: "user", text: textInput, time: new Date(res.headers.date) },
+      { type: "bot", text: res.data.resMsg, time: new Date(res.headers.date) },
+    ]);
+  };
+
+  const messageBoxRef = useRef<HTMLUListElement>();
+  const scrollToBottom = () => {
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+    }
+  };
 
   return (
     <Container>

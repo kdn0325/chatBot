@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   ButtonContainer,
-  CheckText,
   CloseImage,
   ContentArea,
   CustomerService,
@@ -9,22 +8,16 @@ import {
   FooterArea,
   HeadArea,
   InputContainer,
-  LoginCheck,
   LoginContainer,
-  LoginRetain,
-  LogoContainer,
-  MainLogo,
   TabContainer,
-  TabText,
   TouchButton,
 } from "./styles";
-import { getLogin } from "@/utils/apiClient";
+
 import Container from "@/layout";
 import Input from "@/components/Input";
 import ButtonBox from "@/components/ButtonBox";
 import Eyes from "@/assets/img/Eyes.png";
 import Clear from "@/assets/img/Clear.png";
-import Logo from "@/assets/img/Logo.png";
 import { NavigationProp } from "@/types";
 import theme from "@/styles/theme";
 import { GlobalText } from "@/styles/global";
